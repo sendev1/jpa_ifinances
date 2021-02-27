@@ -45,10 +45,10 @@ public class IFinancesApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		//User user = createNewUser();
+		//User user = Helper.createNewUser();
 		//userRepository.save(user);
 
-		/*Credential credential = createCredential();
+		/*Credential credential = Helper.createCredential();
 		credential.setUser(user);
 		credentialRepository.save(credential);*/
 		//user.setCredential(credential);
@@ -57,76 +57,21 @@ public class IFinancesApplication implements CommandLineRunner {
 		findUser();
 
 
-		/*Bank bank = createNewBank();
+		/*Bank bank = Helper.createNewBank();
 		bankRepository.save(bank);*/
 	}
 
 	private void findCredential() {
 
 		List<Credential> credentials = credentialRepository.findByUserName("djoe");
-		logger.info("Fetched credentials:"+ credentials);
+		logger.info("Fetched credentials:" + credentials);
 		Optional<Credential> first = credentials.stream().findFirst();
 		logger.info("User:{}", first.get().getUser());
 	}
 
-	private void findUser(){
+	private void findUser() {
 		User user = userRepository.findById(1);
-		logger.info("user:{}",user);
-		logger.info("credentials: {}",user.getCredential() );
+		logger.info("user:{}", user);
+		logger.info("credentials: {}", user.getCredential());
 	}
-
-	private Credential createCredential() {
-		Credential credential = new Credential();
-		credential.setUserName("djoe");
-		credential.setPassword("123");
-		return credential;
-	}
-
-
-	private Bank createNewBank() {
-
-		Bank bank = new Bank();
-		bank.setName("WELLS FARGO");
-		bank.setCreatedBy("SYSTEM");
-		bank.setLastUpdatedBy("SYSTEM");
-		bank.setAddress(createAddress());
-		bank.getContacts().add("Marie");
-		bank.getContacts().add("John");
-
-		return bank;
-	}
-
-	private User createNewUser() {
-		User user = new User();
-		user.setFirstName("John");
-		user.setLastName("Doe");
-
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-		String dateInString = "7-Jun-2013";
-		try {
-			user.setBirthDate(formatter.parse(dateInString));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		user.setEmailAddress("nobody@gmail.com");
-		user.setCreatedBy("SYSTEM");
-		user.setLastUpdatedBy("SYSTEM");
-
-		Address address = createAddress();
-		user.setAddress(address);
-
-		return user;
-	}
-
-	private Address createAddress() {
-		Address address = new Address();
-		address.setAddressLine1("13880 LOCAL DRIVE");
-		address.setAddressLine2("APT 300");
-		address.setCity("EDEN PRAIRIE");
-		address.setZipCode("55344");
-		address.setState("MN");
-		return address;
-	}
-
-
 }
