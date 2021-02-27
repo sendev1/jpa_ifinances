@@ -18,9 +18,7 @@ public class BankRepository {
         entityManager.persist(bank);
     }
 
-    /*public List<Student> findByName(String name){
-        TypedQuery<Student> namedQuery = entityManager.createNamedQuery("find_stud_by-name", Student.class);
-        namedQuery.setParameter("name", name);
-        return namedQuery.getResultList();
-    }*/
+    public Bank findById(int id){
+        return entityManager.find(Bank.class, id);
+    }
 }
