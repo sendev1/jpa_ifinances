@@ -51,6 +51,7 @@ public class IFinancesApplication implements CommandLineRunner {
 		/*Credential credential = createCredential();
 		credential.setUser(user);
 		credentialRepository.save(credential);*/
+		//user.setCredential(credential);
 
 		//findCredential();
 		findUser();
