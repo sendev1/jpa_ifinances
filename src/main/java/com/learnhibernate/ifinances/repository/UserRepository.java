@@ -4,6 +4,8 @@ import com.learnhibernate.ifinances.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -18,9 +20,7 @@ public class UserRepository {
         entityManager.persist(user);
     }
 
-    /*public List<Student> findByName(String name){
-        TypedQuery<Student> namedQuery = entityManager.createNamedQuery("find_stud_by-name", Student.class);
-        namedQuery.setParameter("name", name);
-        return namedQuery.getResultList();
-    }*/
+    public User findById(int id){
+        return entityManager.find(User.class,id);
+    }
 }

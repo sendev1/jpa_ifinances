@@ -47,6 +47,17 @@ public class User {
             @AttributeOverride(name = "addressLine2", column = @Column(name = "USER_ADDRESS_LINE_2"))})
     private Address address;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Credential credential;
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -128,5 +139,16 @@ public class User {
     }
 
     public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
     }
 }
