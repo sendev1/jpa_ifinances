@@ -60,21 +60,43 @@ public class IFinancesApplication implements CommandLineRunner {
 		/*Bank bank = Helper.createNewBank();
 		bankRepository.save(bank);*/
 
-		Bank bank = findBank();
+		/*Bank bank = findBank();
 		Account account = Helper.createNewAccount(bank);
 		Transaction beltTransaction = Helper.createBeltTransaction(account);
 		Transaction shoeTransaction = Helper.createShoeTransaction(account);
 		account.getTransactions().add(beltTransaction);
 		account.getTransactions().add(shoeTransaction);
-		//Budget budget = Helper.createNewBudget(account.getTransactions());
-		//entityManager.persist(budget);
-		accountRepository.save(account);
+		Budget budget = Helper.createNewBudget(account.getTransactions());
+		entityManager.persist(budget);*/
+		//accountRepository.save(account);
 		//entityManager.persist(beltTransaction);
 
-		Transaction transaction = entityManager.find(Transaction.class, account.getTransactions().get(0).getTransactionId());
-		logger.info("Fetched account type:{}", transaction.getAccount().getAccountType());
+		/*Transaction transaction = entityManager.find(Transaction.class, account.getTransactions().get(0).getTransactionId());
+		logger.info("Fetched account type:{}", transaction.getAccount().getAccountType());*/
 		//Budget budget1 = entityManager.find(Budget.class, budget.getBudgetId());
 		//logger.info("Fetched account type:{}", budget1.getTransactions().get(0).getAccount().getAccountType());
+
+		// Testing Many to Many
+		Bank bank = findBank();
+		Account account = Helper.createNewAccount(bank);
+		Account account2 = Helper.createNewAccount(bank);
+		User user = Helper.createNewUser();
+		User user2 = Helper.createNewUser();
+		account.getUsers().add(user);
+		account2.getUsers().add(user);
+		account.getUsers().add(user2);
+		account2.getUsers().add(user2);
+
+		// Managing both side of relationship
+		user.getAccounts().add(account);
+		user2.getAccounts().add(account);
+		user2.getAccounts().add(account2);
+		user.getAccounts().add(account2);
+
+		accountRepository.save(account);
+		accountRepository.save(account2);
+
+
 	}
 
 	private void findCredential() {
