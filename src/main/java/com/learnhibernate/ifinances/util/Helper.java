@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class Helper {
@@ -104,5 +105,14 @@ public class Helper {
         transaction.setTitle("Shoe");
         transaction.setTransactionType("Withdrawl");
         return transaction;
+    }
+
+    public static Budget createNewBudget(List<Transaction> transactions){
+        Budget budget = new Budget();
+        budget.setName("Emergency Fund");
+        budget.setGoalAmount(10000);
+        budget.setPeriod(12);
+        budget.setTransactions(transactions);
+        return budget;
     }
 }

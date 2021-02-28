@@ -66,10 +66,15 @@ public class IFinancesApplication implements CommandLineRunner {
 		Transaction shoeTransaction = Helper.createShoeTransaction(account);
 		account.getTransactions().add(beltTransaction);
 		account.getTransactions().add(shoeTransaction);
+		//Budget budget = Helper.createNewBudget(account.getTransactions());
+		//entityManager.persist(budget);
 		accountRepository.save(account);
+		//entityManager.persist(beltTransaction);
 
 		Transaction transaction = entityManager.find(Transaction.class, account.getTransactions().get(0).getTransactionId());
 		logger.info("Fetched account type:{}", transaction.getAccount().getAccountType());
+		//Budget budget1 = entityManager.find(Budget.class, budget.getBudgetId());
+		//logger.info("Fetched account type:{}", budget1.getTransactions().get(0).getAccount().getAccountType());
 	}
 
 	private void findCredential() {

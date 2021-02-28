@@ -26,11 +26,6 @@ public class Account {
     // No need account reference in Transaction class
     //@OneToMany(cascade = CascadeType.ALL)
     //@JoinColumn(name = "ACCOUNT_ID", nullable = false)
-
-    //@OneToMany(mappedBy = "account") -> this did not work
-
-    //@OneToMany(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "ACCOUNT_ID")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
     List<Transaction> transactions = new ArrayList<>();
 
