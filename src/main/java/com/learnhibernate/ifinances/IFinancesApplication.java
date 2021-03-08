@@ -76,7 +76,7 @@ public class IFinancesApplication implements CommandLineRunner {
 		//Budget budget1 = entityManager.find(Budget.class, budget.getBudgetId());
 		//logger.info("Fetched account type:{}", budget1.getTransactions().get(0).getAccount().getAccountType());
 
-		// Testing Many to Many
+		/*// Testing Many to Many
 		Bank bank = findBank();
 		Account account = Helper.createNewAccount(bank);
 		Account account2 = Helper.createNewAccount(bank);
@@ -94,9 +94,19 @@ public class IFinancesApplication implements CommandLineRunner {
 		user.getAccounts().add(account2);
 
 		accountRepository.save(account);
-		accountRepository.save(account2);
+		accountRepository.save(account2);*/
 
+		// Test table per class inheritance
+		Portfolio portfolio = Helper.createNewPortfolio();
+		Stock stock = Helper.createNewStock(portfolio);
+		Bond bond = Helper.createNewBond(portfolio);
 
+		portfolio.getInvestments().add(stock);
+		portfolio.getInvestments().add(bond);
+
+		entityManager.persist(stock);
+		entityManager.persist(bond);
+		entityManager.persist(portfolio);
 	}
 
 	private void findCredential() {

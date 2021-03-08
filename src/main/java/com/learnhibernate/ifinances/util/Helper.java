@@ -115,4 +115,33 @@ public class Helper {
         budget.setTransactions(transactions);
         return budget;
     }
+
+    public static Portfolio createNewPortfolio() {
+        Portfolio portfolio = new Portfolio();
+        portfolio.setName("1New portfolio");
+        return portfolio;
+    }
+
+    public static Stock createNewStock(Portfolio portfolio) {
+        Stock stock = new Stock();
+        stock.setName("1TSLA");
+        stock.setIssuer("1Fidility");
+        stock.setPurchaseDate(new Date());
+        stock.setQuantity(1);
+        stock.setSharePrice(100);
+        stock.setPortfolio(portfolio);
+        return stock;
+    }
+
+    public static Bond createNewBond(Portfolio portfolio){
+        Bond bond = new Bond();
+        bond.setName("1Govt");
+        bond.setInterestRate(1.12);
+        bond.setIssuer("1FED");
+        bond.setMaturityDate(new Date());
+        bond.setPurchaseDate(new Date());
+        bond.setValue(1000);
+        bond.setPortfolio(portfolio);
+        return bond;
+    }
 }
